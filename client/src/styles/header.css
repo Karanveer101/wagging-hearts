@@ -1,0 +1,172 @@
+.Header {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 40px;
+    padding-right: 40px;
+    box-shadow: 0 -8px 10px 5px rgba(0, 0, 0, 0.5);
+    padding-top: 6px;
+    padding-bottom: 6px;
+    position: fixed;
+    width: 100%;
+    z-index: 4;
+}
+
+.authLinkList {
+    list-style: none;
+    display: flex;
+    margin-right: 80px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    align-items: center;
+}
+
+#signupBtn {
+    background-color: var(--red);
+    color: white;
+    font-weight: 700;
+    padding: 10px 25px 10px 25px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+#loginBtn {
+    color: var(--black);
+    font-weight: 700;
+    padding: 10px 25px 10px 25px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    border: 1px solid gray;
+}
+#loginBtn:hover {
+    border: 2px solid var(--black);
+}
+
+#signupBtn:hover {
+    background-color: var(--darkRed);
+}
+
+.navLinks {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin-block-end: 0;
+    padding-bottom: 1em;
+}
+
+.navLinks li {
+    color: var(--red);
+}
+
+.navLinks li a {
+    text-decoration: none;
+    color: var(--black);
+    font-weight: 700;
+    padding-bottom: 1.2em;
+    padding-top: 1.2em;
+}
+.authLinkList li:first-child {
+    margin-right: 20px;
+}
+
+.authLinkList li {
+    position: relative;
+}
+
+#signInLink {
+    color: var(--black);
+    font-weight: 700;
+    border: solid #39393965;
+    padding: 10px 25px 10px 25px;
+    border-radius: 50px;
+}
+
+#signInLink:hover {
+    border-color: var(--black);
+}
+
+.mainNav {
+    display: flex;
+}
+
+.mainNavContainer {
+    display: flex;
+}
+
+.navLinks li a:hover {
+    border-bottom: 4px solid #217693;
+}
+
+.userActionsContainer {
+    display: flex;
+    position: relative;
+    height: 100%;
+    align-items: center;
+    gap: 10px;
+    margin-right: 80px;
+    height: 100%;
+    align-self: center;
+}
+
+#userProfileBtn:hover {
+    cursor: pointer;
+}
+.menuLinksContainer,
+.signupLinksContainer,
+.loginLinksContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    position: absolute;
+    background-color: white;
+    right: 0;
+    padding: 20px 20px 20px 20px;
+    top: 55px;
+    border-radius: 5px;
+    z-index: 2;
+    border: 1px solid var(--blue);
+    width: max-content;
+}
+
+#logo {
+    height: 34px;
+    margin-top: 8px;
+}
+
+.heartIcon:hover,
+.personIcon:hover {
+    fill: #217693;
+}
+
+#logOutBtn {
+    background-color: var(--red);
+    border: none;
+    cursor: pointer;
+    color: white;
+    border-radius: 5px;
+    font-weight: 700;
+    padding: 5px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+#logOutBtn:hover {
+    background-color: var(--darkRed);
+}
+
+.menuLinksContainer a,
+.signupLinksContainer a,
+.loginLinksContainer a {
+    text-decoration: none;
+    color: var(--black);
+    font-weight: 700;
+    padding: 5px 0px 5px 0px;
+}
+
+.menuLinksContainer a:hover,
+.signupLinksContainer a:hover,
+.loginLinksContainer a:hover {
+    color: var(--blue);
+}

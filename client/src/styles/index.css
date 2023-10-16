@@ -1,0 +1,26 @@
+:root {
+    --black: #393939;
+    --lightBlue: #b2dae4;
+    --blue: #217693;
+    --yellow: #fffaf3;
+    --darkRed: #dd194a;
+    --red: #ff1e57;
+    --lightRed: #ff1e56c3;
+}
+
+h2 {
+    color: var(--black);
+    font-weight: 700;
+}
+
+body {
+    margin: 0;
+    font-family: Circular Std Book, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
+}

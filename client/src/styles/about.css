@@ -1,0 +1,21 @@
+.aboutContentContainer {
+    padding-top: 58px;
+    display: flex;
+    margin: auto;
+}
+
+.aboutContentContainer div {
+    flex: 1;
+}
+
+.aboutContentContainer .content {
+    background-color: var(--yellow);
+    padding: 20px
+}
+
+#developerImage {
+    width: 100%;
+    height: calc(100vh - 57px);
+    object-fit: cover;
+}
+

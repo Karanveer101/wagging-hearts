@@ -1,0 +1,78 @@
+.footerContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #fffaf3;
+}
+
+.menuWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.Footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.copyright {
+    text-align: center;
+    font-size: 0.7rem;
+    border-top: 0.5px solid gray;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 0;
+}
+
+.waggingHeartsLinks li a,
+.supportLinks li a,
+.dashboardLinks li a {
+    text-decoration: none;
+    color: black;
+    font-size: 0.8rem;
+    line-height: 40px;
+}
+
+.waggingHeartsLinks li a:hover,
+.supportLinks li a:hover,
+.dashboardLinks li a:hover {
+    color: var(--blue);
+}
+
+.waggingHeartsLinks li,
+.supportLinks li,
+.dashboardLinks li {
+    list-style: none;
+}
+
+h4,
+h3 {
+    color: var(--black);
+}
+#quizBtn {
+    background-color: #217693dd;
+    color: white;
+    font-weight: 700;
+    padding: 10px 25px 10px 25px;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+#quizBtn:hover {
+    background-color: var(--blue)
+}
+
+#celebratingDog {
+    height: 120px;
+}
+
+.quizLinkContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
