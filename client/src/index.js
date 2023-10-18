@@ -1,15 +1,11 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
-import {
-    createBrowserRouter,
-    RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./styles/index.css";
 import App from "./components/App";
 import Quiz from "./components/Quiz";
 import About from "./components/About";
 import Favorites from "./components/Dashboard/Favorites";
-import Matches from "./components/Dashboard/Matches";
 import { useState, useEffect } from "react";
 import SearchResults from "./components/SearchResults";
 import DogProfile from "./components/DogProfile";
@@ -31,7 +27,8 @@ import { AuthProvider } from "./Context/AuthContext";
 import Dashboard from "./components/Dashboard/Dashboard";
 import AdopterDashboardLayout from "./components/Dashboard/AdopterDashboardLayout";
 import Layout from "./components/Admin/layout";
-import QuizSection from "./components/Dashboard/QuizSection";
+import QuizResults from "./components/QuizResults";
+import BestMatches from "./components/Dashboard/BestMatches";
 
 function Root() {
     const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -128,8 +125,8 @@ function Root() {
                     ),
                 },
                 {
-                    path: "quiz",
-                    element: <QuizSection />,
+                    path: "matches",
+                    element: <BestMatches />,
                 },
                 {
                     path: "inquiries",
@@ -137,17 +134,22 @@ function Root() {
                 },
                 {
                     path: "favorites",
-                    element: <Favorites />,
-                },
-                {
-                    path: "matches",
-                    element: <Matches />,
+                    element: (
+                        <Favorites
+                            favoriteDogs={favoriteDogs}
+                            setFavoriteDogs={setFavoriteDogs}
+                        />
+                    ),
                 },
             ],
         },
         {
             path: "/quiz",
             element: <Quiz />,
+        },
+        {
+            path: "/quiz/results",
+            element: <QuizResults />,
         },
         {
             path: "/admin",

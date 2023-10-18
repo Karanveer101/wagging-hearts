@@ -77,7 +77,7 @@ function Header(props) {
                         <div className='menuLinksContainer'>
                             <a href='/adopter/dashboard'>Dashboard</a>
                             <a href='/adopter/favorites'>Favorites</a>
-                            <a href='/adopter/quiz'>Quiz</a>
+                            <a href='/quiz'>Quiz</a>
                             <a href='/adopter/inquiries'>Inquiries</a>
                             <button id='logOutBtn' onClick={handleLogout}>
                                 Log Out

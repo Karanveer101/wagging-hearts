@@ -6,13 +6,14 @@ import Header from "./Shared/Header";
 import celebratingDog from "./../images/celebrating-dog.png";
 import breedList from "./../data/dogBreeds";
 import { getBestMatches } from "../services/bestMatchService";
+import { useNavigate } from "react-router-dom";
 
 function Quiz(props) {
+    const navigate = useNavigate();
     const { isAuthenticated, setIsAuthenticated } = props;
     const quizStartRef = useRef(null);
     const quizInterfaceRef = useRef(null);
     const [currentQuestion, setCurrentQuestion] = useState(0);
-    const [bestMatch, setBestMatch] = useState([]);
 
     function hideStartQuiz() {
         if (quizStartRef.current) {
@@ -21,12 +22,9 @@ function Quiz(props) {
         }
     }
     const [userPreferences, setUserPreferences] = useState({
-        experience: "",
-        house: "",
         age: "",
         gender: "",
         size: "",
-        active: "",
         houseTrained: "",
         breed: "",
     });
@@ -35,7 +33,7 @@ function Quiz(props) {
 
     function handleClick(e) {
         e.preventDefault();
-        const selectedOption = e.target.textContent;
+        const selectedOption = e.target.dataset.propertyName;
         const field = e.target.getAttribute("data-field");
 
         if (field) {
@@ -47,72 +45,78 @@ function Quiz(props) {
         }
     }
 
+    //breed list turned into array of breed objects
+    const breedObjects = breedList.map((breedName) => {
+        return { [breedName]: breedName };
+    });
+
     //quiz questions
     const questions = [
         {
-            question: "1.) Have you owned or raised a dog before?",
-            field: "experience",
-            options: [
-                "Yes, I'm an experienced dog owner",
-                "No, this will be my first time",
-            ],
-        },
-        {
-            question: "2.) Where will your dog live?",
-            field: "house",
-            options: [
-                "A house with a fenced yard",
-                "A house with a yard",
-                "A house with no yard",
-            ],
-        },
-        {
-            question: "3.) What is your ideal preference?",
+            question: "1.) What is your ideal preference?",
             field: "age",
             options: [
-                "No age preference",
-                "A puppy",
-                "A young dog",
-                "A adult dog",
-                "A senior dog",
+                {
+                    baby: "A puppy",
+                },
+                {
+                    young: "A young dog",
+                },
+                {
+                    adult: "A adult dog",
+                },
+                {
+                    senior: "A senior dog",
+                },
             ],
         },
         {
-            question: "4.) I would like to adopt a",
+            question: "2.) I would like to adopt a",
             field: "gender",
-            options: ["No preference", "Male", "Female"],
+            options: [
+                {
+                    male: "Male",
+                },
+                {
+                    female: "Female",
+                },
+            ],
         },
 
         {
-            question: "5.) How big do you want your fully grown dog to be?",
+            question: "3.) How big do you want your fully grown dog to be?",
             field: "size",
             options: [
-                "small (0-25 lbs)",
-                "medium (26-60 lbs)",
-                "large (61-100 lbs)",
-                "extra large (101 lbs or more)",
+                {
+                    small: "small (0-25 lbs)",
+                },
+                {
+                    medium: "medium (26-60 lbs)",
+                },
+                {
+                    large: "large (61-100 lbs)",
+                },
+                {
+                    extraLarge: "extra large (101 lbs or more)",
+                },
             ],
         },
         {
-            question: "6.) What is your dog's prefered activity level",
-            field: "activity",
-            options: [
-                "no activity preference",
-                "very active",
-                "active",
-                "laid back",
-                "lap pet",
-            ],
-        },
-        {
-            question: "7.) I want my dog to be house trained",
+            question: "4.) I want my dog to be house trained",
             field: "houseTrained",
-            options: ["No preference", "Yes", "No"],
+            options: [
+                {
+                    true: "Yes",
+                },
+                {
+                    false: "No",
+                },
+            ],
         },
         {
-            question: "8.) A breed I really like is",
+            question: "5.) A breed I really like is",
             field: "breed",
-            options: breedList,
+            options: breedObjects,
         },
     ];
 
@@ -135,6 +139,12 @@ function Quiz(props) {
     //progress bar
     const totalQuestions = questions.length;
     const progress = ((currentQuestion + 1) / totalQuestions) * 100;
+
+    //handle quiz results
+    async function handleQuizResults() {
+        const bestMatches = await getBestMatches(userPreferences);
+        navigate("/quiz/results", { state: { bestMatches } });
+    }
 
     return (
         <div className='Quiz'>
@@ -168,23 +178,29 @@ function Quiz(props) {
                         <h2>{questions[currentQuestion].question}</h2>
                         <ul className='options'>
                             {questions[currentQuestion].options.map(
-                                (option, index) => (
-                                    <li
-                                        key={index}
-                                        data-field={
-                                            questions[currentQuestion].field
-                                        }
-                                        className={
-                                            Object.values(
-                                                userPreferences
-                                            ).includes(option)
-                                                ? "selected"
-                                                : ""
-                                        }
-                                    >
-                                        {option}
-                                    </li>
-                                )
+                                (option, index) => {
+                                    const key = Object.keys(option)[0]; // Get the key of the option object
+                                    const value = option[key]; // Get the value associated with the key
+
+                                    return (
+                                        <li
+                                            key={index}
+                                            data-field={
+                                                questions[currentQuestion].field
+                                            }
+                                            data-property-name={key}
+                                            className={
+                                                Object.values(
+                                                    userPreferences
+                                                ).includes(key)
+                                                    ? "selected"
+                                                    : ""
+                                            }
+                                        >
+                                            {value}
+                                        </li>
+                                    );
+                                }
                             )}
                         </ul>
                     </div>
@@ -209,14 +225,12 @@ function Quiz(props) {
                             </button>
                         )}
 
-                        {currentQuestion === 7 &&
+                        {currentQuestion === 4 &&
                             Object.values(userPreferences)[currentQuestion] !==
                                 "" && (
                                 <button
                                     id='viewResultsBtn'
-                                    onClick={() =>
-                                        getBestMatches(userPreferences)
-                                    }
+                                    onClick={() => handleQuizResults()}
                                 >
                                     View Results
                                 </button>

@@ -10,6 +10,7 @@ import { searchById } from "../../services/dogService";
 
 function Favorites(props) {
     const { favoriteDogs, setFavoriteDogs } = props;
+    console.log(favoriteDogs);
     const navigate = useNavigate();
     const [favorites, setFavorites] = useState([]);
     console.log(favorites);

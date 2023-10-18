@@ -2,7 +2,7 @@ import React from "react";
 import { MdOutlineQuiz } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
-function QuizSection() {
+function BestMatches() {
     const navigate = useNavigate();
     return (
         <div className='QuizSection'>
@@ -22,4 +22,4 @@ function QuizSection() {
     );
 }
 
-export default QuizSection;
+export default BestMatches;

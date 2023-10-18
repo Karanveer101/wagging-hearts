@@ -1,5 +1,5 @@
 import React from "react";
-import Quiz from "./QuizSection";
+import Quiz from "./BestMatches";
 import Favorites from "./Favorites";
 import "../../styles/Dashboard/dashboard.css";
 import Inquiries from "./Inquiries";

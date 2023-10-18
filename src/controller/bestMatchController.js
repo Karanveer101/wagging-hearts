@@ -1,91 +1,10 @@
 const getAccessToken = require("../services/petfinderAccessToken");
 
-const scoringSystem = {
-    experience: {
-        "Experienced Owner": 3,
-        "First-Time Owner": 1,
-    },
-    house: {
-        "House with Fenced Yard": 3,
-        "House with Yard": 2,
-        "House with No Yard": 1,
-    },
-    age: {
-        Puppy: 3,
-        "Young Dog": 2,
-        "Adult Dog": 1,
-        "Senior Dog": 1,
-    },
-    gender: {
-        Male: 2,
-        Female: 2,
-        "No Preference": 1,
-    },
-    size: {
-        "Small (0-25 lbs)": 3,
-        "Medium (26-60 lbs)": 2,
-        "Large (61-100 lbs)": 1,
-        "Extra Large (101 lbs or more)": 1,
-    },
-    active: {
-        "Very Active": 3,
-        Active: 2,
-        "Laid Back": 1,
-        "No Activity Preference": 1,
-    },
-    houseTrained: {
-        Yes: 2,
-        No: 1,
-        "No Preference": 1,
-    },
-};
-
-const calculateBestMatch = (userPreferences, dog) => {
-    const { age, gender, size, active, houseTrained, breed } = userPreferences;
-
-    const calculateScore = (dog) => {
-        const ageScore = scoringSystem.age[breed.age] || 0;
-        const genderScore = scoringSystem.gender[breed.gender] || 0;
-        const sizeScore = scoringSystem.size[breed.size] || 0;
-        const activityLevelScore =
-            scoringSystem.activityLevel[breed.activityLevel] || 0;
-        const houseTrainedScore =
-            scoringSystem.houseTrained[breed.houseTrained] || 0;
-        const breedScore = breedPreference === breed.breed ? 7 : 0;
-
-        // Calculate total score based on user preferences
-        const totalScore =
-            ageScore +
-            sizeScore +
-            activityLevelScore +
-            genderScore +
-            houseTrainedScore +
-            breedScore;
-        console.log("the total score is", totalScore);
-        return totalScore;
-    };
-
-    const matchingBreeds = dogBreeds.filter((breed) => {
-        return (
-            breed.size === size &&
-            breed.activityLevel === active &&
-            breed.friendliness === friendlinessPreference
-        );
-    });
-
-    // Sort breeds by score (higher score means a better match)
-    const sortedBreeds = matchingBreeds.sort(
-        (a, b) => calculateScore(b) - calculateScore(a)
-    );
-
-    return sortedBreeds;
-};
-
 //get the best matches
 async function getBestMatches(req, res) {
     //Get user preferences data from client
-    const { experience, breed } = req.body;
-    console.log(experience);
+    const { breed, age, size, gender, houseTrained } = req.body;
+    console.log(req.body);
     try {
         // Get accessToken
         const accessToken = await getAccessToken();
@@ -101,11 +20,55 @@ async function getBestMatches(req, res) {
         });
 
         if (response.ok) {
-            const dogs = await response.json();
-            console.log(dogs);
-            //calculate the best matches
+            const data = await response.json();
 
-            return res.json(dogs); // Send the API response data
+            // Filter dogs with photos
+            const dogsWithPhotos = data.animals.filter(
+                (dog) => dog.photos.length > 0
+            );
+
+            // Asign a score to each dog
+            const dogsWithScore = dogsWithPhotos.map((dog) => {
+                let score = 0;
+
+                // Calculate score based on matching criteria and scoringSystem values
+                if (dog.age.toString().toLowerCase() === age) {
+                    score += 1;
+                    console.log(dog.age.toString().toLowerCase());
+                }
+                if (dog.size.toString().toLowerCase() === size.toLowerCase()) {
+                    score += 1;
+                    console.log(dog.size.toString().toLowerCase());
+                }
+                if (dog.gender.toString().toLowerCase() === gender) {
+                    score += 1;
+                    console.log(dog.gender.toString().toLowerCase());
+                }
+                if (
+                    dog.attributes.house_trained.toString().toLowerCase() ===
+                    houseTrained
+                ) {
+                    score += 1;
+                    console.log(
+                        dog.attributes.house_trained.toString().toLowerCase()
+                    );
+                }
+
+                // Assign the calculated score as a property to each dog object
+                return { ...dog, score };
+            });
+
+            console.log("the dogs with score", dogsWithScore);
+
+            //sort from highest to lowest score
+            const sortByScore = dogsWithScore.sort((a, b) => b.score - a.score);
+
+            //get the top 10 matches
+            const bestMatches = sortByScore.slice(0, 10);
+
+            console.log("the best matches are", bestMatches);
+
+            return res.json(bestMatches); // Send the API response data
         } else {
             throw new Error("Unable to get dogs");
         }

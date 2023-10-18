@@ -12,7 +12,9 @@ const getBestMatches = async (userPreferences) => {
         );
 
         if (response.ok) {
-            console.log("sucessfully fetched best match");
+            const bestMatches = response.json();
+            console.log("sucessfully fetched best match", bestMatches);
+            return bestMatches;
         } else {
             console.error("Error sending best match");
         }

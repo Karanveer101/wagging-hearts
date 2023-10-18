@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import { sendInquiry } from "../services/inquiryService";
 import { getUserData } from "../services/userService";
 import { useNavigate } from "react-router-dom";
+import { BsSendCheckFill } from "react-icons/bs";
 
 function Inquiry(props) {
     const navigate = useNavigate();
@@ -22,8 +23,8 @@ function Inquiry(props) {
         dogName: dogName,
         dogImage: dogImage,
         status: "Pending",
-        sender: '',
-        message: ''
+        sender: "",
+        message: "",
     });
 
     console.log(inquiryData);
@@ -44,7 +45,7 @@ function Inquiry(props) {
                 setContactDetails(data);
                 setInquiryData((prev) => ({
                     ...prev,
-                    sender: data[0].firstName
+                    sender: data[0].firstName,
                 }));
                 setIsLoading(false);
             } catch (error) {
@@ -189,7 +190,30 @@ function Inquiry(props) {
                             </div>
                         ) : (
                             <div className='inquirySuccessMessage'>
-                                <h1>Your inquiry was sent</h1>
+                                <span id='sentCheckIcon'>
+                                    <BsSendCheckFill fill='#217693' size='70' />
+                                </span>
+                                <h1>Inquiry Sent!</h1>
+                                <p>
+                                    You have successfully submitted an inquiry
+                                    for review.
+                                </p>
+                                <div className='inquiryNavBtns'>
+                                    <button
+                                        id='homeBtn'
+                                        onClick={() => navigate("/")}
+                                    >
+                                        Home
+                                    </button>
+                                    <button
+                                        id='dashboardBtn'
+                                        onClick={() =>
+                                            navigate("/adopter/dashboard")
+                                        }
+                                    >
+                                        Dashboard
+                                    </button>
+                                </div>
                             </div>
                         )}
                     </div>
