@@ -1,5 +1,5 @@
 
-const fetchInquiries = async () => {
+export const fetchInquiries = async () => {
     try {
         const response = await fetch(
             `${process.env.REACT_APP_SERVER_HOST}api/applications/inquiries`,
@@ -21,7 +21,7 @@ const fetchInquiries = async () => {
     }
 };
 
-const updateInquiryStatus = async (inquiryId, newValue) => {
+export const updateInquiryStatus = async (inquiryId, newValue) => {
     try {
         const response = await fetch(
             `${process.env.REACT_APP_SERVER_HOST}api/applications/updateInquiryStatus`,
@@ -46,4 +46,3 @@ const updateInquiryStatus = async (inquiryId, newValue) => {
     }
 };
 
-module.exports = { fetchInquiries, updateInquiryStatus };
