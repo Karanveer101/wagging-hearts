@@ -1,6 +1,7 @@
+const axios = require("axios");
 const getAccessToken = require("../services/petfinderAccessToken");
 
-//home page dog display
+// Home page dog display
 async function homeDogDisplay(req, res) {
     try {
         const accessToken = await getAccessToken();
@@ -8,22 +9,21 @@ async function homeDogDisplay(req, res) {
         const apiUrl =
             "https://api.petfinder.com/v2/animals?type=dog&age=baby&limit=100";
 
-        const response = await fetch(apiUrl, {
-            method: "GET",
+        const response = await axios.get(apiUrl, {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
             },
         });
 
-        if (response.ok) {
-            const data = await response.json();
+        if (response.status === 200) {
+            const data = response.data;
             // Filter dogs with photos
             const dogsWithPhotos = data.animals.filter(
                 (dog) => dog.photos.length > 0
             );
 
             console.log(
-                "dogs with photos fetched successfully for home page display",
+                "Dogs with photos fetched successfully for home page display",
                 dogsWithPhotos
             );
 
@@ -39,7 +39,7 @@ async function homeDogDisplay(req, res) {
     }
 }
 
-//search dogs based on breed and location
+// Search dogs based on breed and location
 async function search(req, res) {
     try {
         // Get accessToken
@@ -51,15 +51,14 @@ async function search(req, res) {
         // Make the API request
         const apiUrl = `https://api.petfinder.com/v2/animals?&breed=${breed}&location=${location}&limit=100`;
 
-        const response = await fetch(apiUrl, {
-            method: "GET",
+        const response = await axios.get(apiUrl, {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
             },
         });
 
-        if (response.ok) {
-            const responseData = await response.json();
+        if (response.status === 200) {
+            const responseData = response.data;
             console.log(responseData);
             return res.json(responseData); // Send the API response data
         } else {
@@ -71,7 +70,7 @@ async function search(req, res) {
     }
 }
 
-//search dogs based on breed and location
+// Search dogs based on breed and location
 async function searchById(req, res) {
     try {
         // Get accessToken
@@ -82,15 +81,14 @@ async function searchById(req, res) {
         // Make the API request
         const apiUrl = `https://api.petfinder.com/v2/animals/${dogId}`;
 
-        const response = await fetch(apiUrl, {
-            method: "GET",
+        const response = await axios.get(apiUrl, {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
             },
         });
 
-        if (response.ok) {
-            const responseData = await response.json();
+        if (response.status === 200) {
+            const responseData = response.data;
             console.log(responseData);
             return res.json(responseData); // Send the API response data
         } else {
