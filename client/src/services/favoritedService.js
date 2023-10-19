@@ -1,5 +1,5 @@
 //fetch request to add favorited dog data to the database
-async function addToFavorites(dog, navigate) {
+export async function addToFavorites(dog, navigate) {
     //if user is not authenticated, redirect to the login page
     const token = localStorage.getItem("jwtToken");
     if (!token) {
@@ -36,7 +36,7 @@ async function addToFavorites(dog, navigate) {
     }
 }
 
-async function getAllFavorites(navigate) {
+export async function getAllFavorites(navigate) {
     //if user is not authenticated, redirect to the login page
     const token = localStorage.getItem("jwtToken");
     if (!token) {
@@ -72,7 +72,7 @@ async function getAllFavorites(navigate) {
     }
 }
 
-async function removeFromFavorites(dogId, navigate) {
+export async function removeFromFavorites(dogId, navigate) {
     //if user is not authenticated, redirect to the login page
     const token = localStorage.getItem("jwtToken");
     if (!token) {
@@ -107,7 +107,7 @@ async function removeFromFavorites(dogId, navigate) {
     }
 }
 
-const toggleFavorite = async (
+export const toggleFavorite = async (
     dog,
     dogId,
     favoriteDogs,
@@ -135,9 +135,4 @@ const toggleFavorite = async (
     }
 };
 
-module.exports = {
-    addToFavorites,
-    getAllFavorites,
-    removeFromFavorites,
-    toggleFavorite,
-};
+

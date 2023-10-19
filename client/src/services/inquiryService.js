@@ -1,5 +1,5 @@
 // Function to send sign-up data to the server
-async function sendInquiry(inquiryData, setSentStatus) {
+export async function sendInquiry(inquiryData, setSentStatus) {
     const token = localStorage.getItem("jwtToken");
     try {
         const response = await fetch(`${process.env.REACT_APP_SERVER_HOST}api/inquiry/send`, {
@@ -26,7 +26,7 @@ async function sendInquiry(inquiryData, setSentStatus) {
 }
 
 // Function to get all inquiries sent by the user
-async function fetchInquiriesSent(setInquiries) {
+export async function fetchInquiriesSent(setInquiries) {
     const token = localStorage.getItem("jwtToken");
     try {
         const response = await fetch(
@@ -61,4 +61,3 @@ async function fetchInquiriesSent(setInquiries) {
     }
 }
 
-module.exports = { sendInquiry, fetchInquiriesSent };

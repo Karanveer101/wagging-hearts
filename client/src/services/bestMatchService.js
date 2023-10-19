@@ -1,4 +1,4 @@
-const getBestMatches = async (userPreferences) => {
+export const getBestMatches = async (userPreferences) => {
     try {
         const response = await fetch(
             `${process.env.REACT_APP_SERVER_HOST}api/dog/best-matches`,
@@ -23,4 +23,3 @@ const getBestMatches = async (userPreferences) => {
     }
 };
 
-module.exports = { getBestMatches };

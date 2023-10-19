@@ -1,5 +1,5 @@
 // Function to send sign-up data to the server
-async function sendUserData(valid, signUpData, navigate) {
+export async function sendUserData(valid, signUpData, navigate) {
     if (valid) {
         try {
             const response = await fetch(
@@ -36,7 +36,7 @@ async function sendUserData(valid, signUpData, navigate) {
 }
 
 //send form data to server for login
-const handleSubmit = async (
+export const handleSubmit = async (
     e,
     loginData,
     setIsAuthenticated,
@@ -86,4 +86,3 @@ const handleSubmit = async (
     }
 };
 
-module.exports = { sendUserData, handleSubmit };

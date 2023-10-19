@@ -1,5 +1,5 @@
 //get dogs for home page display
-async function homeDogDisplay(setDogs) {
+export async function homeDogDisplay(setDogs) {
     try {
         const response = await fetch(
             `${process.env.REACT_APP_SERVER_HOST}api/dog/homeDogDisplay`,
@@ -22,7 +22,7 @@ async function homeDogDisplay(setDogs) {
 }
 
 //handle search submit
-const handleSearch = async (
+export const handleSearch = async (
     e,
     search,
     navigate,
@@ -65,7 +65,7 @@ const handleSearch = async (
 };
 
 //handle search dog by id
-const searchById = async (dogId, navigate) => {
+export const searchById = async (dogId, navigate) => {
     try {
         const response = await fetch(
             `${process.env.REACT_APP_SERVER_HOST}api/dog/search-dog?id=${dogId}`,
@@ -93,7 +93,7 @@ const searchById = async (dogId, navigate) => {
 };
 
 //handle filter search
-const handleFilter = async (e, search, size, gender, age, setSearchResults) => {
+export const handleFilter = async (e, search, size, gender, age, setSearchResults) => {
     e.preventDefault();
     try {
         const response = await fetch(
@@ -123,4 +123,3 @@ const handleFilter = async (e, search, size, gender, age, setSearchResults) => {
     }
 };
 
-module.exports = { homeDogDisplay, handleSearch, searchById, handleFilter };

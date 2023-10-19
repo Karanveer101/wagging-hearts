@@ -1,5 +1,5 @@
 //fetch request to get user contact details
-async function getUserData(isAuthenticated, navigate) {
+export async function getUserData(isAuthenticated, navigate) {
     //if user is not authenticated, redirect to the login page
     if (isAuthenticated === false) {
         navigate("/login/customer");
@@ -35,4 +35,3 @@ async function getUserData(isAuthenticated, navigate) {
     }
 }
 
-module.exports = { getUserData };
