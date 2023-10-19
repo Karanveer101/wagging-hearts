@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ApplicationNav from "./ApplicationNav";
 import { RiFilePaper2Line } from "react-icons/ri";
-import { fetchInquiries } from "../../../services/admin/applicationsService";
 import { MdDeleteForever } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import statusColors from "./Status/statusColors";
 import renderTable from "./Functions/renderTable";
+import { fetchInquiries } from "../../../services/admin/applicationsService.js";
 
 function Requests() {
     const [inquiries, setInquiries] = useState([]);
