@@ -1,0 +1,33 @@
+.QuizBanner {
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: auto;
+    background-color: var(--lightBlue);
+    margin-top: 50px;
+    box-shadow: 0 2px 10px 0 #e3e2dc;
+}
+
+.QuizBanner img {
+    width: 250px;
+}
+
+.QuizBanner div h2 {
+    color: var(--blue)
+}
+
+.QuizBanner button {
+    background-color: var(--red);
+    border: none;
+    cursor: pointer;
+    color: white;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 10px 15px 10px 15px;
+}
+
+.QuizBanner button:hover {
+    background-color: var(--darkRed);
+}

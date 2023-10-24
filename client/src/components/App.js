@@ -2,6 +2,8 @@ import React from "react";
 import Main from "./Main/Main";
 import Footer from "./Shared/Footer";
 import Header from "./Shared/Header";
+import QuizBanner from "./Shared/QuizBanner";
+
 function App(props) {
     const { favoriteDogs, setFavoriteDogs, search, setSearch } = props;
 
@@ -14,6 +16,7 @@ function App(props) {
                 search={search}
                 setSearch={setSearch}
             />
+            <QuizBanner />
             <Footer />
         </div>
     );
