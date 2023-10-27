@@ -29,6 +29,7 @@ import AdopterDashboardLayout from "./components/Dashboard/AdopterDashboardLayou
 import Layout from "./components/Admin/layout";
 import QuizResults from "./components/QuizResults";
 import BestMatches from "./components/Dashboard/BestMatches";
+import ViewInquiry from "./components/Dashboard/ViewInquiry";
 
 function Root() {
     const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -140,6 +141,10 @@ function Root() {
                             setFavoriteDogs={setFavoriteDogs}
                         />
                     ),
+                },
+                {
+                    path: "inquiry/view",
+                    element: <ViewInquiry />,
                 },
             ],
         },

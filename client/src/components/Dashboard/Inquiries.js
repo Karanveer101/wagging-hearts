@@ -80,7 +80,7 @@ function Inquiries() {
                                                     id='viewBtn'
                                                     onClick={() =>
                                                         navigate(
-                                                            "/admin/applications/inquiry/view"
+                                                            "/adopter/inquiry/view"
                                                         )
                                                     }
                                                 >
