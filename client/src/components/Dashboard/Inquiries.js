@@ -5,6 +5,7 @@ import { fetchInquiriesSent } from "../../services/inquiryService";
 import statusColors from "../Admin/Applications/Status/statusColors";
 import { MdDeleteForever } from "react-icons/md";
 import { deleteInquiry } from "../../services/inquiryService";
+import { ClipLoader } from "react-spinners";
 
 function Inquiries() {
     const navigate = useNavigate();
@@ -33,7 +34,14 @@ function Inquiries() {
             <div>
                 <h3>Your Inquiries</h3>
                 {isLoading ? (
-                    <div>Loading...</div>
+                    <div>
+                        <ClipLoader
+                            size={50}
+                            aria-label='Loading Spinner'
+                            data-testid='loader'
+                            color='#217693'
+                        />
+                    </div>
                 ) : inquiries.length > 0 ? (
                     <div className='inquiries'>
                         <table>

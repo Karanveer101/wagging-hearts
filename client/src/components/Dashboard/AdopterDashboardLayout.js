@@ -4,6 +4,7 @@ import Header from "../Shared/Header";
 import DashboardNav from "../../components/Dashboard/DashboardNav";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
+import { ClipLoader } from "react-spinners";
 
 const AdopterDashboardLayout = (props) => {
     const { isAuthenticated, userRole } = useAuth();
@@ -20,7 +21,14 @@ const AdopterDashboardLayout = (props) => {
     }, [isAuthenticated, userRole]);
 
     return isLoading ? (
-        <div>Loading...</div>
+        <div>
+            <ClipLoader
+                size={50}
+                aria-label='Loading Spinner'
+                data-testid='loader'
+                color='#217693'
+            />
+        </div>
     ) : isAuthenticated && userRole === "registeredUser" ? (
         <div className='Dashboard'>
             <Header />{" "}

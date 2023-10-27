@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import "./../../styles/Dashboard/favorite.css";
 import { removeFromFavorites } from "../../services/favoritedService";
 import { searchById } from "../../services/dogService";
+import { ClipLoader } from "react-spinners";
 
 function Favorites(props) {
     const { favoriteDogs, setFavoriteDogs } = props;
@@ -76,7 +77,12 @@ function Favorites(props) {
     return (
         <div className='Favorites'>
             {isLoading ? (
-                <div>Loading...</div>
+                <div> <ClipLoader
+                size={50}
+                aria-label='Loading Spinner'
+                data-testid='loader'
+                color='#217693'
+            /></div>
             ) : (
                 <div>
                     <h3>Your Favorites</h3>

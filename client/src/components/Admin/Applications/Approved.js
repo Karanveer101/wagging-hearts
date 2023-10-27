@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { MdDeleteForever } from "react-icons/md";
 import renderTable from "./Functions/renderTable";
 import { RiFilePaper2Line } from "react-icons/ri";
+import { ClipLoader } from "react-spinners";
 function Approved() {
     const navigate = useNavigate();
     const [inquiries, setInquiries] = useState([]);
@@ -30,7 +31,14 @@ function Approved() {
         <div>
             <ApplicationNav />
             {isLoading ? (
-                <div>Loading...</div>
+                <div>
+                    <ClipLoader
+                        size={50}
+                        aria-label='Loading Spinner'
+                        data-testid='loader'
+                        color='#217693'
+                    />
+                </div>
             ) : (
                 <div className='RequestsContainer'>
                     {inquiries.length > 0 ? (

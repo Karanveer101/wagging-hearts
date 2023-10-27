@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import statusColors from "./Status/statusColors";
 import renderTable from "./Functions/renderTable";
 import { fetchInquiries } from "../../../services/admin/applicationsService.js";
+import { ClipLoader } from "react-spinners";
 
 function Requests() {
     const [inquiries, setInquiries] = useState([]);
@@ -27,7 +28,14 @@ function Requests() {
         <div>
             <ApplicationNav />
             {isLoading ? (
-                <div>Loading...</div>
+                <div>
+                    <ClipLoader
+                        size={50}
+                        aria-label='Loading Spinner'
+                        data-testid='loader'
+                        color='#217693'
+                    />
+                </div>
             ) : (
                 <div className='RequestsContainer'>
                     {inquiries.length > 0 ? (

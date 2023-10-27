@@ -7,6 +7,7 @@ import { sendInquiry } from "../services/inquiryService";
 import { getUserData } from "../services/userService";
 import { useNavigate } from "react-router-dom";
 import { BsSendCheckFill } from "react-icons/bs";
+import { ClipLoader } from "react-spinners";
 
 function Inquiry(props) {
     const navigate = useNavigate();
@@ -71,7 +72,15 @@ function Inquiry(props) {
             />
             <div className='InquiryContainer'>
                 {isLoading ? (
-                    <div>Loading...</div>
+                    <div>
+                        {" "}
+                        <ClipLoader
+                            size={50}
+                            aria-label='Loading Spinner'
+                            data-testid='loader'
+                            color='#217693'
+                        />
+                    </div>
                 ) : (
                     <div className='InquiryWrapper'>
                         {!sentStatus && contactDetails.length > 0 ? (
