@@ -56,4 +56,20 @@ async function fetchInquiriesSent(req, res) {
     }
 }
 
-module.exports = { sendInquiry, fetchInquiriesSent };
+async function deleteInquiry(req, res) {
+    const inquiryId = req.params.id;
+    console.log(inquiryId);
+    try {
+        // delete an inquiry
+        const deletedInquiry = await Inquiry.deleteOne({ _id: inquiryId });
+        console.log("the inquiry was deleted", deletedInquiry);
+        res.status(200).json({ message: "Inquiry deleted successfully" });
+    } catch (error) {
+        res.status(500).json({
+            message: "Internal server error",
+            error: error.message,
+        });
+    }
+}
+
+module.exports = { sendInquiry, fetchInquiriesSent, deleteInquiry };

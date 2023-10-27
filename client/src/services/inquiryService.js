@@ -2,14 +2,17 @@
 export async function sendInquiry(inquiryData, setSentStatus) {
     const token = localStorage.getItem("jwtToken");
     try {
-        const response = await fetch(`${process.env.REACT_APP_SERVER_HOST}api/inquiry/send`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify(inquiryData), // Convert the data to a JSON formatted string
-        });
+        const response = await fetch(
+            `${process.env.REACT_APP_SERVER_HOST}api/inquiry/send`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(inquiryData), // Convert the data to a JSON formatted string
+            }
+        );
 
         if (response.ok) {
             // Handle a successful response from the server
@@ -61,3 +64,28 @@ export async function fetchInquiriesSent(setInquiries) {
     }
 }
 
+//Function to delete an inquiry sent by client
+export async function deleteInquiry(inquiryId) {
+    try {
+        const response = await fetch(
+            `${process.env.REACT_APP_SERVER_HOST}api/inquiry/${inquiryId}`,
+            {
+                method: "DELETE",
+            }
+        );
+
+        if (response.ok) {
+            // Handle a successful response from the server
+            console.log("Inquiry deleted successfully");
+            return true;
+        } else {
+            // Handle other server errors
+            console.error("unsuccessful attempt at deleting inquiry");
+            return false;
+        }
+    } catch (error) {
+        // Handle network errors or other exceptions
+        console.error("Error deleting inquiry:", error);
+        return false;
+    }
+}

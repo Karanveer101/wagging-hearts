@@ -4,19 +4,30 @@ import { useNavigate } from "react-router-dom";
 import { fetchInquiriesSent } from "../../services/inquiryService";
 import statusColors from "../Admin/Applications/Status/statusColors";
 import { MdDeleteForever } from "react-icons/md";
+import { deleteInquiry } from "../../services/inquiryService";
 
 function Inquiries() {
     const navigate = useNavigate();
     const [inquiries, setInquiries] = useState();
     const [isLoading, setIsLoading] = useState(true);
+    const [deleted, setDeleted] = useState(false);
 
     useEffect(() => {
         (async () => {
             await fetchInquiriesSent(setInquiries);
             setIsLoading(false);
         })();
-    }, []);
+    }, [deleted]);
 
+    async function handleDelete(inquiryId) {
+        const deletedInquiry = await deleteInquiry(inquiryId);
+        console.log(deletedInquiry);
+        if (deletedInquiry) {
+            setDeleted(!deleted);
+        } else {
+            console.log("error deleting inquiry");
+        }
+    }
     return (
         <div className='Applications'>
             <div>
@@ -75,7 +86,13 @@ function Inquiries() {
                                                 >
                                                     View
                                                 </button>
-                                                <span>
+                                                <span
+                                                    onClick={() =>
+                                                        handleDelete(
+                                                            inquiry._id
+                                                        )
+                                                    }
+                                                >
                                                     <MdDeleteForever
                                                         className='deleteInqIcon'
                                                         size='35'
